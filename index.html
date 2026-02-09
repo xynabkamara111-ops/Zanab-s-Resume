@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zainab Kamara - Interactive CV Dashboard</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    @keyframes fillBar {
+      from { width: 0; }
+      to { width: var(--skill-level); }
+    }
+    .skill-bar { animation: fillBar 1.5s ease-out forwards; }
+
+    /* Ensure all text is visible with explicit colors */
+    body { font-size: 14px; color: #1f2937; }
+    p, li, span, a { color: inherit; }
+    .summary-text { font-size: 0.75rem; line-height: 1.5; color: #374151; }
+    .exp-list li { font-size: 0.72rem; line-height: 1.45; color: #374151; margin-bottom: 2px; }
+
+    /* Skill badges with inline styling fallback */
+    .skill-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.4;
+      margin: 2px;
+    }
+    .badge-blue { background-color: #2563eb; }
+    .badge-purple { background-color: #7c3aed; }
+    .badge-green { background-color: #059669; }
+    .badge-teal { background-color: #0d9488; }
+    .badge-orange { background-color: #ea580c; }
+
+    .date-pill {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      background-color: #dbeafe;
+      color: #1d4ed8;
+      padding: 1px 8px;
+      border-radius: 9999px;
+      white-space: nowrap;
+    }
+    .section-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #1d4ed8;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 4px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+    }
+    .section-title i { margin-right: 6px; font-size: 0.875rem; }
+    .exp-title { font-weight: 700; color: #2563eb; font-size: 0.75rem; }
+    .exp-org { font-size: 0.75rem; font-weight: 500; color: #1f2937; }
+    .exp-list { padding-left: 1rem; margin-top: 4px; }
+    .check-item { display: flex; align-items: flex-start; margin-bottom: 2px; }
+    .check-item i { color: #3b82f6; margin-top: 3px; margin-right: 5px; font-size: 0.65rem; flex-shrink: 0; }
+    .check-item span { font-size: 0.75rem; color: #374151; }
+    .lang-bar-bg { width: 100%; background-color: #e5e7eb; border-radius: 9999px; height: 6px; }
+    .lang-bar-fill { height: 6px; border-radius: 9999px; background-color: #2563eb; }
+    .edu-degree { font-weight: 700; color: #2563eb; font-size: 0.75rem; }
+    .edu-school { font-size: 0.75rem; color: #374151; }
+    .sub-heading { font-weight: 700; color: #2563eb; font-size: 0.75rem; margin-bottom: 4px; display: flex; align-items: center; }
+    .sub-heading i { margin-right: 5px; font-size: 0.7rem; }
+
+    @media print {
+      .bg-blue-700 { background-color: #1d4ed8 !important; print-color-adjust: exact; }
+      .bg-blue-800 { background-color: #1e40af !important; print-color-adjust: exact; }
+      .text-white { color: white !important; print-color-adjust: exact; }
+      .badge-blue, .badge-purple, .badge-green, .badge-teal, .badge-orange { print-color-adjust: exact; }
+      .shadow-lg, .shadow-md, .shadow-sm { box-shadow: none !important; }
+      @page { margin: 0.5cm; }
+    }
+    @media (max-width: 768px) {
+      .resp-grid { grid-template-columns: 1fr !important; }
+      .resp-span { grid-column: span 1 !important; }
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <div class="container mx-auto" style="max-width:210mm; padding:8px;">
+
+    <!-- Header -->
+    <div class="bg-blue-700 text-white shadow-lg" style="padding:14px 16px; border-radius:8px 8px 0 0;">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <div>
+          <h1 style="font-size:1.5rem; font-weight:700; color:#fff; margin:0;">Zainab Kamara</h1>
+          <p style="color:#bfdbfe; margin-top:4px; font-size:0.875rem;">Data Analyst | Research Coordinator | ICT4D Specialist</p>
+        </div>
+        <div style="text-align:right; font-size:0.8rem;">
+          <p style="color:#bfdbfe; display:flex; align-items:center; justify-content:flex-end; gap:4px; margin:2px 0;">
+            <i class="fas fa-map-marker-alt" style="font-size:0.7rem;"></i> 14 Kebe Drive, Grafton, Freetown
+          </p>
+          <p style="display:flex; align-items:center; justify-content:flex-end; gap:4px; margin:2px 0;">
+            <i class="fas fa-envelope" style="font-size:0.7rem; color:#bfdbfe;"></i>
+            <a href="mailto:xynabkamara111@gmail.com" style="color:#bfdbfe; text-decoration:none;">xynabkamara111@gmail.com</a>
+          </p>
+          <p style="display:flex; align-items:center; justify-content:flex-end; gap:4px; margin:2px 0;">
+            <i class="fas fa-phone" style="font-size:0.7rem; color:#bfdbfe;"></i>
+            <a href="tel:+23278873311" style="color:#bfdbfe; text-decoration:none;">+232 78 873311</a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Grid -->
+    <div class="resp-grid" style="display:grid; grid-template-columns:1fr 2fr; gap:8px; margin-top:8px;">
+
+      <!-- LEFT COLUMN -->
+      <div>
+
+        <!-- Professional Summary -->
+        <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition" style="padding:12px; margin-bottom:8px;">
+          <h2 class="section-title"><i class="fas fa-user-tie"></i> Professional Summary</h2>
+          <p class="summary-text">
+            A dedicated and results-focused professional with a strong foundation in mathematics, statistics, and data analytics. Experienced in research coordination, ICT for Development (ICT4D), user support, and digital data collection for large-scale health campaigns. Adept at working collaboratively in high-pressure environments, with proven ability to train field teams, manage data systems, and drive operational efficiency. Passionate about leveraging technology and analytical skills to support evidence-based decision-making in development and public health programs.
+          </p>
+        </div>
+
+        <!-- Education -->
+        <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition" style="padding:12px; margin-bottom:8px;">
+          <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Education</h2>
+          <div style="margin-bottom:10px;">
+            <div style="display:flex; align-items:flex-start;">
+              <i class="fas fa-university" style="color:#2563eb; margin-right:6px; margin-top:2px; font-size:0.7rem;"></i>
+              <div>
+                <p class="edu-degree">B.Sc. Mathematics & Statistics</p>
+                <p class="edu-school">Fourah Bay College, University of Sierra Leone</p>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex; align-items:flex-start;">
+              <i class="fas fa-school" style="color:#2563eb; margin-right:6px; margin-top:2px; font-size:0.7rem;"></i>
+              <div>
+                <p class="edu-degree">WASSCE, BECE, NPSE</p>
+                <p class="edu-school">SOS Hermann Gmeiner International School</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Core Strengths -->
+        <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition" style="padding:12px; margin-bottom:8px;">
+          <h2 class="section-title"><i class="fas fa-hand-holding-heart"></i> Core Strengths</h2>
+          <div class="check-item"><i class="fas fa-check-circle"></i><span>Excellent Communication</span></div>
+          <div class="check-item"><i class="fas fa-check-circle"></i><span>Critical Thinking & Problem Solving</span></div>
+          <div class="check-item"><i class="fas fa-check-circle"></i><span>Self-Motivated & Result-Focused</span></div>
+          <div class="check-item"><i class="fas fa-check-circle"></i><span>Thrives Under Pressure</span></div>
+          <div class="check-item"><i class="fas fa-check-circle"></i><span>Team Collaboration & Leadership</span></div>
+          <div class="check-item"><i class="fas fa-check-circle"></i><span>Multi-Tasking & Time Management</span></div>
+          <div class="check-item"><i class="fas fa-check-circle"></i><span>Strong Analytical Mindset</span></div>
+          <div class="check-item"><i class="fas fa-check-circle"></i><span>Inclusive & Cross-Cultural Collaboration</span></div>
+        </div>
+
+        <!-- Languages -->
+        <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition" style="padding:12px;">
+          <h2 class="section-title"><i class="fas fa-language"></i> Languages</h2>
+          <div>
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; margin-bottom:3px;">
+              <span style="font-weight:600; color:#1f2937;">English</span>
+              <span style="color:#6b7280;">Fluent</span>
+            </div>
+            <div class="lang-bar-bg">
+              <div class="lang-bar-fill skill-bar" style="--skill-level:95%; width:95%;"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div>
+
+        <!-- Technical Skills -->
+        <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition" style="padding:12px; margin-bottom:8px;">
+          <h2 class="section-title"><i class="fas fa-laptop-code"></i> Technical Skills</h2>
+
+          <div style="margin-bottom:8px;">
+            <h3 class="sub-heading"><i class="fas fa-chart-line"></i> Statistical & Data Analysis</h3>
+            <div style="display:flex; flex-wrap:wrap;">
+              <span class="skill-badge badge-blue">SPSS (Proficient)</span>
+              <span class="skill-badge badge-blue">STATA (Proficient)</span>
+              <span class="skill-badge badge-blue">Statistical Analysis</span>
+              <span class="skill-badge badge-blue">Data Visualization</span>
+            </div>
+          </div>
+
+          <div style="margin-bottom:8px;">
+            <h3 class="sub-heading"><i class="fas fa-file-alt"></i> Productivity & Office Suite</h3>
+            <div style="display:flex; flex-wrap:wrap;">
+              <span class="skill-badge badge-purple">Microsoft Word (Proficient)</span>
+              <span class="skill-badge badge-purple">Microsoft Excel (Proficient)</span>
+              <span class="skill-badge badge-purple">Microsoft PowerPoint (Proficient)</span>
+              <span class="skill-badge badge-purple">Microsoft Outlook</span>
+              <span class="skill-badge badge-purple">Google Sheets</span>
+            </div>
+          </div>
+
+          <div style="margin-bottom:8px;">
+            <h3 class="sub-heading"><i class="fas fa-mobile-alt"></i> Data Collection & Mobile Tools</h3>
+            <div style="display:flex; flex-wrap:wrap;">
+              <span class="skill-badge badge-green">ODK (Proficient)</span>
+              <span class="skill-badge badge-green">KoBo Collect (Proficient)</span>
+              <span class="skill-badge badge-green">Red Rose Platform (Proficient)</span>
+              <span class="skill-badge badge-green">CommCare</span>
+              <span class="skill-badge badge-green">ICF Collect</span>
+              <span class="skill-badge badge-green">Clappia</span>
+            </div>
+          </div>
+
+          <div style="margin-bottom:8px;">
+            <h3 class="sub-heading"><i class="fas fa-cogs"></i> ICT4D & Campaign Technology</h3>
+            <div style="display:flex; flex-wrap:wrap;">
+              <span class="skill-badge badge-teal">CAT Platform</span>
+              <span class="skill-badge badge-teal">Biometric Attendance Systems</span>
+              <span class="skill-badge badge-teal">Android Device Configuration</span>
+              <span class="skill-badge badge-teal">Dashboard Monitoring</span>
+              <span class="skill-badge badge-teal">Digital Training Facilitation</span>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="sub-heading"><i class="fas fa-flask"></i> Research & Monitoring & Evaluation</h3>
+            <div style="display:flex; flex-wrap:wrap;">
+              <span class="skill-badge badge-orange">Research Coordination</span>
+              <span class="skill-badge badge-orange">Survey Design</span>
+              <span class="skill-badge badge-orange">Data Quality Assurance</span>
+              <span class="skill-badge badge-orange">Report Writing</span>
+              <span class="skill-badge badge-orange">KPI Monitoring</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Experience - Top 2 -->
+        <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition" style="padding:12px;">
+          <h2 class="section-title"><i class="fas fa-briefcase"></i> Professional Experience</h2>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+
+            <!-- Research Coordinator -->
+            <div>
+              <div style="border-left:2px solid #3b82f6; padding-left:8px; padding-top:4px; padding-bottom:4px;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                  <span class="exp-title">Research Coordinator</span>
+                  <span class="date-pill">2022 - 2025</span>
+                </div>
+                <p class="exp-org">Our Generation for Inclusive Peace (OGIP)</p>
+                <ul class="exp-list list-disc">
+                  <li>Coordinated all activities within the Research Pillar, ensuring timely delivery of research outputs and alignment with organizational goals.</li>
+                  <li>Supervised and edited research series and blog publications, maintaining quality standards across all outputs.</li>
+                  <li>Facilitated coordination among OGIP research communities, fostering collaboration and knowledge-sharing.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- User Support Coordinator -->
+            <div>
+              <div style="border-left:2px solid #3b82f6; padding-left:8px; padding-top:4px; padding-bottom:4px;">
+                <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                  <span class="exp-title">User Support Coordinator</span>
+                  <span class="date-pill">2023 - Present</span>
+                </div>
+                <p class="exp-org">Informatics Consultancy Firm - Sierra Leone</p>
+                <ul class="exp-list list-disc">
+                  <li>Served as primary point of contact for user inquiries, issues, and feedback, resolving problems with clear guidance.</li>
+                  <li>Trained users on product features, best practices, and updates to minimize recurring issues.</li>
+                  <li>Monitored KPIs related to user support and developed training guides and materials.</li>
+                  <li>Coordinated with internal teams to ensure escalated issues were resolved on time.</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ICT4D Full Width -->
+    <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition" style="padding:12px; margin-top:8px;">
+      <h2 class="section-title"><i class="fas fa-briefcase"></i> Professional Experience (continued)</h2>
+      <div style="border-left:2px solid #3b82f6; padding-left:8px; padding-top:4px; padding-bottom:4px;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+          <span class="exp-title">ICT4D Consultant – Insecticide Treated Net (ITN) Mass Campaign</span>
+          <span class="date-pill">2023 - 2024</span>
+        </div>
+        <p class="exp-org">Catholic Relief Services (CRS) - Sierra Leone</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:4px;">
+          <ul class="exp-list list-disc">
+            <li>Administered biometric time-and-attendance tracking profiles and managed personnel sequencing during campaign trainings.</li>
+            <li>Managed campaign personnel changes on the CAT platform, ensuring efficient badge printing and delivery for authentication.</li>
+            <li>Provided technical guidance to ward supervisors, household mobilizers, and distribution teams on Android devices, solar chargers, and the Red Rose application.</li>
+          </ul>
+          <ul class="exp-list list-disc">
+            <li>Performed daily data collation and management to identify inconsistencies from generated reports and dashboards.</li>
+            <li>Ensured provisioning and delivery of buffer devices in cases of theft, loss, or damage to ICT4D equipment.</li>
+            <li>Led training sessions on CAT strategy, data collection procedures, Android device configuration, power management, and data entry dynamics.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Core Competencies -->
+    <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition" style="padding:12px; margin-top:8px;">
+      <h2 class="section-title"><i class="fas fa-star"></i> Core Competencies</h2>
+      <div style="display:flex; flex-wrap:wrap;">
+        <span class="skill-badge badge-blue">Research Coordination</span>
+        <span class="skill-badge badge-blue">ICT for Development</span>
+        <span class="skill-badge badge-blue">Data Collection & Management</span>
+        <span class="skill-badge badge-blue">Digital Health Campaigns</span>
+        <span class="skill-badge badge-blue">User Support & Training</span>
+        <span class="skill-badge badge-blue">Statistical Analysis</span>
+        <span class="skill-badge badge-blue">Biometric Systems</span>
+        <span class="skill-badge badge-blue">Dashboard Monitoring</span>
+        <span class="skill-badge badge-blue">Field Staff Training</span>
+        <span class="skill-badge badge-blue">Technical Documentation</span>
+        <span class="skill-badge badge-blue">Quality Assurance</span>
+        <span class="skill-badge badge-blue">Malaria Prevention Programs</span>
+      </div>
+    </div>
+
+    <!-- References -->
+    <div class="bg-blue-800 text-white shadow-lg" style="padding:12px; margin-top:8px; border-radius:8px;">
+      <h2 style="font-size:1rem; font-weight:700; margin-bottom:8px; text-align:center; color:#fff;">Referees</h2>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
+        <div style="display:flex; align-items:flex-start;">
+          <i class="fas fa-user-circle" style="color:#93c5fd; font-size:0.75rem; margin-top:2px; margin-right:6px;"></i>
+          <div>
+            <p style="font-weight:700; font-size:0.75rem; color:#fff;">Mr. John Sawo-Koroma</p>
+            <p style="font-size:0.7rem; color:#bfdbfe;">+232 79 827616</p>
+          </div>
+        </div>
+        <div style="display:flex; align-items:flex-start;">
+          <i class="fas fa-user-circle" style="color:#93c5fd; font-size:0.75rem; margin-top:2px; margin-right:6px;"></i>
+          <div>
+            <p style="font-weight:700; font-size:0.75rem; color:#fff;">Mr. Jobson Siaffa Momoh</p>
+            <p style="font-size:0.7rem; color:#bfdbfe;">+232 99 999989</p>
+          </div>
+        </div>
+        <div style="display:flex; align-items:flex-start;">
+          <i class="fas fa-user-circle" style="color:#93c5fd; font-size:0.75rem; margin-top:2px; margin-right:6px;"></i>
+          <div>
+            <p style="font-weight:700; font-size:0.75rem; color:#fff;">Mr. Musa Sillah Kanu</p>
+            <p style="font-size:0.7rem; color:#bfdbfe;">Senior Monitoring, Evaluation & Surveillance Officer</p>
+            <a href="mailto:sillahmusakanu@gmail.com" style="font-size:0.7rem; color:#bfdbfe; text-decoration:none;">sillahmusakanu@gmail.com</a>
+            <p style="font-size:0.7rem; color:#bfdbfe;">+232 31 096508</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
